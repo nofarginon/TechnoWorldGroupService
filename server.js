@@ -20,9 +20,6 @@ app.use(
     });
 
 /*** All routs***/
-app.get('/',function (req,res) {
-    serverLogger.writeLog(" '/' request");
-});
 
 app.get('/getSongsData', Songs.getData);
 app.get('/getPlayListByPreferences',Songs.getPlayListByPreferences);
