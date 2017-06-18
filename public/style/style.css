@@ -1,0 +1,40 @@
+body{
+    background-image: url("../images/Group 20.png");
+    background-size: 100%;
+    background-color: #000000;
+}
+
+.container{
+    opacity: 0.9;
+    font-family: 'Quantico', sans-serif;
+    color:#00BAFF;
+}
+
+.jumbotron{
+  background: none;
+}
+
+.panel{
+  background: none;
+}
+
+.panel-primary{
+  border:linear-gradient(to left, rgba(255,0,108,0.4), rgba(124,95,183,0.4), rgba(0,186,255,0.4));
+}
+
+.panel-primary>.panel-heading{
+  background: linear-gradient(to left, rgba(255,0,108,0.4), rgba(124,95,183,0.4), rgba(0,186,255,0.4));
+  border:linear-gradient(to left, rgba(255,0,108,0.4), rgba(124,95,183,0.4), rgba(0,186,255,0.4));
+}
+
+.text-primary{
+  color:#92003D;
+}
+
+.label-success{
+  background: linear-gradient(to left, rgba(255,0,108,0.4), rgba(124,95,183,0.4), rgba(0,186,255,0.4));
+}
+
+a:hover{
+  color:#92003D;
+}

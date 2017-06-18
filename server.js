@@ -9,7 +9,10 @@ const express = require('express'),
     Songs = require('./controllers/songsController');
 
 app.set('port',port);
-app.use('/', express.static('./public'));//for API
+//app.use('/', express.static('./public'));//for API
+app.use('/assets', express.static(`${__dirname}/public`));
+app.use(express.static(__dirname + '/public'));
+
 app.use(
     (req,res,next) => {
         res.header("Access-Control-Allow-Origin", "*");
@@ -20,6 +23,10 @@ app.use(
     });
 
 /*** All routs***/
+app.get('/',function(req,res){
+  serverLogger.writeLog(" '/' request");
+  res.sendFile(`assets/`);
+});
 
 app.get('/getSongsData', Songs.getData);
 app.get('/getPlayListByPreferences',Songs.getPlayListByPreferences);

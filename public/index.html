@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Techno World Group</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="style/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quantico" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron">
+          <h1 class="text-center"><span class="text-primary">Techno World Group API</span></h1>
+          <p class="text-center">This is Techno World Group API</br>
+          explain how to use on this app.</br>
+          You can use in 3 methods:</br>
+          getSongsData, getPlayListByPreferences and getPlayListByProPreferences</p>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading"><h4>Present your songs list:</h4></div>
+            <div class="panel-body">
+                <h4><span class="label label-info">http verb:get</span></h4>
+                <h4><span class="label label-primary">/getSongsData</span></h4>
+                <p>If you would like to see all the songs in this app you will have to go into this link:</br>
+                <a href="https://technoworldgroup.herokuapp.com/getSongsData">https://technoworldgroup.herokuapp.com/getSongsData</a>
+                </br>You will get a response in json view</p>
+            </div>
+            <div class="panel-heading">
+            <h4>Looking for playlist by Techno genre and period:</h4></div>
+            <div class="panel-body">
+                <h4><span class="label label-info">http verb:get</span></h4>
+                <h4><span class="label label-primary">/getPlayListByPreferences</span></h4>
+                <p>If you would like to looking for playlist by insert youe favorite genre in Techno and period you will have to go into this link: </br>
+                <a href="https://technoworldgroup.herokuapp.com/getPlayListByPreferences?genre=minimal&period=modern">https://technoworldgroup.herokuapp.com/getPlayListByPreferences?genre=minimal&period=modern</a>
+              </br>In this serach we were looking for minimal music from modern time.</br>
+                 If there is a match playlist with this preferences, you will get a response in json view with this playlist</br>
+                    message error in json view otherwise</p>
+            </div>
+            <div class="panel-heading"><h4>
+            Looking for playlist by pro preferences:</h4></div>
+            <div class="panel-body">
+                <h4><span class="label label-info">http verb:get</span></h4>
+                <h4><span class="label label-primary">/getPlayListByProPreferences</span></h4>
+                <p>If you would like to looking for a playlist by advanced preferences in our playlist machine you will have to go into this link:
+                </br><a href="https://technoworldgroup.herokuapp.com/getPlayListByProPreferences?bpm=140&accent=1&bassdrums=5&scatter=3&mfx=max&melodie=exciting&cymbal=3">
+                https://technoworldgroup.herokuapp.com/getPlayListByProPreferences?bpm=140&accent=1&bassdrums=5&scatter=3&mfx=max&melodie=exciting&cymbal=3</a>
+              </br>If there is a playlist with these preferences, you will get a response in json view with all of playlists with these preferences</br>
+                    message error in json view otherwise</p>
+                    <h4><span class="label label-success">example of success message by json view</span></h4>
+                    <p></br>
+                      &emsp;[</br>
+                        &emsp;&emsp;{</br>
+                            &emsp;&emsp;&emsp;"_id": "5946442e734d1d59b7894e38",</br>
+                            &emsp;&emsp;&emsp;"Djname": "DjB",</br>
+                            &emsp;&emsp;&emsp;"songs": [</br>
+                                &emsp;&emsp;&emsp;&emsp;{</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"_id": "593eac55734d1d02258fd167",</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"id": 7,</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"name": "zu fuss",</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"artist": "Extrawelt",</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"genre": "minimal",</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"period": "modern",</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"bpm": 134,</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"accent": 1,</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"bassdrums": 3,</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"cymbal": 1,</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"melodie": "normal",</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"scatter": 5,</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"mfx": "normal",</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"likes": 0</br>
+                                &emsp;&emsp;&emsp;&emsp;},</br>
+                                &emsp;&emsp;&emsp;&emsp;{</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"_id": "593ea32c734d1d02258fcacc",</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"id": 3,</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"name": "blue days",</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"artist": "hugo featuring comadisco",</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"genre": "normal",</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"period": "modern",</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"bpm": 123,</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"accent": 1,</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"bassdrums": 2,</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"cymbal": 3,</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"melodie": "normal",</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"scatter": 5,</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"mfx": "normal",</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"likes": 0</br>
+                                &emsp;&emsp;&emsp;&emsp;},</br>
+                                &emsp;&emsp;&emsp;&emsp;{</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"_id": "593eabbd734d1d02258fd11c",</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"id": 6,</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"name": "unity",</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"artist": "g-ohm",</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"genre": "hardcore",</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"period": "modern",</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"bpm": 180,</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"accent": 1,</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"bassdrums": 5,</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"cymbal": 5,</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"melodie": "exciting",</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"scatter": 5,</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"mfx": "max",</br>
+                                    &emsp;&emsp;&emsp;&emsp;&emsp;"likes": 0</br>
+                                &emsp;&emsp;&emsp;&emsp;}</br>
+                            &emsp;&emsp;&emsp;]</br>
+                        &emsp;&emsp;}</br>
+                    &emsp;]</br>
+                    </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
