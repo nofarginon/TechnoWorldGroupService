@@ -30,11 +30,16 @@ body{
 .text-primary{
   color:#92003D;
 }
-
-.label-success{
-  background: linear-gradient(to left, rgba(255,0,108,0.4), rgba(124,95,183,0.4), rgba(0,186,255,0.4));
+.label-primary{
+  background-color:#92003D; 
+}
+.label-danger{
+  background: linear-gradient(to left, rgba(255,0,108,1), rgba(124,95,183,1), rgba(0,186,255,1));
 }
 
+.label-success{
+  background: linear-gradient(to left, rgba(255,0,108,1), rgba(124,95,183,1), rgba(0,186,255,1));
+}
 a:hover{
   color:#92003D;
 }

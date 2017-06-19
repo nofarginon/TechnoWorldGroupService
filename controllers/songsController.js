@@ -78,7 +78,8 @@ exports.getPlayListByPreferences = function (req, res) {
   (err,docs)=>{
       if(err)console.log('query error');
       console.log(docs);
-      res.json(docs);
+      if(docs.length===0) res.json({"error": "There is no playlist by these Preferences"});
+      else res.json(docs);
   });
 };
 
@@ -129,6 +130,7 @@ exports.getPlayListByProPreferences = function (req, res) {
   (err,docs)=>{
       if(err)console.log('query error');
       console.log(docs);
-      res.json(docs);
+      if(docs.length===0) res.json({"error": "There is no playlist by these ProPreferences"});
+      else res.json(docs);
   });
 };
