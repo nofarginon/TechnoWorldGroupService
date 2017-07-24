@@ -6,7 +6,8 @@ const express = require('express'),
     Logger = require('./logger'),
     serverLogger = Logger('Server'),
     port = process.env.PORT || 3000,
-    Songs = require('./controllers/songsController');
+    Songs = require('./controllers/songsController'),
+    Comments = require('./controllers/comments_controller');
 
 app.set('port',port);
 //app.use('/', express.static('./public'));//for API
@@ -31,8 +32,8 @@ app.get('/',function(req,res){
 app.get('/getSongsData', Songs.getData);
 app.get('/getPlayListByPreferences',Songs.getPlayListByPreferences);
 app.get('/getPlayListByProPreferences',Songs.getPlayListByProPreferences);
-
-
+app.get('/addComment',Comments.addComment);
+app.get('/replayComment',Comments.addReplay);
 app.listen(port, () => {
     serverLogger.writeLog(`Server listening on port ${port}`);
 });
