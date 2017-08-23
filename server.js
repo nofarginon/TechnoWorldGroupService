@@ -1,17 +1,19 @@
-/**
- * Created by Nofar&Ori on 6/15/2017.
- */
 const express = require('express'),
     app = express(),
     Logger = require('./logger'),
     serverLogger = Logger('Server'),
     port = process.env.PORT || 3000,
+    bodyParser = require('body-parser'),
     Songs = require('./controllers/songsController');
+    User =require('./controllers/userController');
+
+var consts = require('./consts.js');
 
 app.set('port',port);
-//app.use('/', express.static('./public'));//for API
 app.use('/assets', express.static(`${__dirname}/public`));
 app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use(
     (req,res,next) => {
@@ -31,6 +33,7 @@ app.get('/',function(req,res){
 app.get('/getSongsData', Songs.getData);
 app.get('/getPlayListByPreferences',Songs.getPlayListByPreferences);
 app.get('/getPlayListByProPreferences',Songs.getPlayListByProPreferences);
+app.post('/login',User.login);
 
 
 app.listen(port, () => {
