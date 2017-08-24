@@ -6,6 +6,8 @@ const mongoose = require('mongoose'),
     Logger = require('../logger'),
     commentsLogger = Logger('comments_contoller');
 
+
+
 /**
  * Will push comment into comments property of a playlist
  * @param req.params with the format of :
@@ -19,11 +21,20 @@ const mongoose = require('mongoose'),
  *              {error:'no playlist found with this id'} // error when no playlist with the id
  */
 exports.addComment = function (req,res) {
-    let conditions = {_id:req.param('id')}, // Condition will be the id of the playlist which we want to push comment into
+    // let conditions = {_id:req.param('id')}, // Condition will be the id of the playlist which we want to push comment into
+    //     update = {$push:{   // Pushing comment with comment:String and username:String
+    //         comments :{
+    //             comment : req.param('comment'),
+    //             username : req.param('username')
+    //         }
+    //     }},
+    //     opts = {multi: true};
+    console.log(`id:${req.body.id} comment:${req.body.comment} username:${req.body.username}`);
+    let conditions = {_id:req.body.id}, // Condition will be the id of the playlist which we want to push comment into
         update = {$push:{   // Pushing comment with comment:String and username:String
             comments :{
-                comment : req.param('comment'),
-                username : req.param('username')
+                comment : req.body.comment,
+                username : req.body.username
             }
         }},
         opts = {multi: true};
@@ -38,11 +49,11 @@ exports.addComment = function (req,res) {
                 res.json({success:true});
 
             //DEBUG
-            playlist.find({_id:req.param('id')},
+            playlist.find({_id:req.body.id},
                 (err,list)=>{
                     if(err) commentsLogger.writeLog(`find err: ${err}`);
                     else {
-                        commentsLogger.writeLog(`${list}`);
+                        commentsLogger.writeLog(`${JSON.stringify(list)}`);
                     }
                 });
         });
@@ -63,11 +74,11 @@ exports.addComment = function (req,res) {
  *                                                                               // of no comment with this comment_id
  */
 exports.addReplay =  function (req,res) {
-    let conditions = { _id:req.param('id'), "comments._id":req.param('comment_id')}, // Condition will be the id of the playlist and the id of the comment which we want to replay to
+    let conditions = { _id:req.body.id, "comments._id":req.body.comment_id}, // Condition will be the id of the playlist and the id of the comment which we want to replay to
         update = {$push:{   // Pushing replay with comment:String and username:String
             "comments.$.replays" :{
-                comment : req.param('comment'),
-                username : req.param('username')
+                comment : req.body.comment,
+                username : req.body.username
             }
         }},
         opts = {multi: true};
@@ -82,7 +93,7 @@ exports.addReplay =  function (req,res) {
                 res.json({success:true});
 
             //DEBUG
-            playlist.find({_id:req.param('id')},
+            playlist.find({_id:req.body.id},
                 (err,list)=>{
                     if(err) commentsLogger.writeLog(`find err: ${err}`);
                     else {

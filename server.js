@@ -9,6 +9,10 @@ const express = require('express'),
     Songs = require('./controllers/songsController'),
     Comments = require('./controllers/comments_controller');
 
+var bodyParser = require('body-parser');
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+
 app.set('port',port);
 //app.use('/', express.static('./public'));//for API
 app.use('/assets', express.static(`${__dirname}/public`));
@@ -32,8 +36,8 @@ app.get('/',function(req,res){
 app.get('/getSongsData', Songs.getData);
 app.get('/getPlayListByPreferences',Songs.getPlayListByPreferences);
 app.get('/getPlayListByProPreferences',Songs.getPlayListByProPreferences);
-app.get('/addComment',Comments.addComment);
-app.get('/replayComment',Comments.addReplay);
+app.post('/addComment',Comments.addComment);
+app.post('/replayComment',Comments.addReplay);
 app.listen(port, () => {
     serverLogger.writeLog(`Server listening on port ${port}`);
 });
