@@ -3,6 +3,9 @@ var     mongoose = require (`mongoose`),
         song=require('./song_schema').songSchema;
         playlistSchema = new schema({
             Djname: {type: String,required: true},
+            Djimg: {type: String},
+            country:{type:String,required: true},
+            about:{type:String,required: true},
             songs:[song]
     },{collection:`playlist`});
 

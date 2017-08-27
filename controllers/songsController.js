@@ -1,6 +1,7 @@
  const mongoose=require('mongoose');
  var songs=require('../models/song_schema').Song,
-     playlist=require('../models/playlistSchema');
+     playlist=require('../models/playlistSchema'),
+     playlistbuild=require('../models/playlistSchema');
 
 var genreArray=["minimal","ambient","normal","schranz","hardcore"],
     periodArray=["70's","80's","90's","modern"],
@@ -131,3 +132,43 @@ exports.getPlayListByProPreferences = function (req, res) {
       else res.json(docs);
   });
 };
+
+
+exports.createPlaylist = function (req, res) {
+    // var newsongs=songs.find({_id:{$in:req.body.songs.map(function(id){return mongoose.Types.ObjectId(id);})}});
+    songs.find({"id":{$in:req.body.songs}},(err,newsongs)=>{
+      if(err){
+        console.log(`err:${err}`);
+        res.json({error:'couldnot add a new playlist'});
+        //res.json(newsongs);
+      }
+      else{
+            console.log(newsongs);
+        newPlaylist(req,res,newsongs);
+      }
+
+    });
+  
+}
+
+function newPlaylist(req, res,newsongs){
+  var newPlaylist=new playlistbuild({
+    Djname :req.body.Djname,
+    Djimg:'unknown',
+    country:req.body.country,
+    about:req.body.about,
+    songs:newsongs
+  });
+  newPlaylist.save(
+    (err)=>{
+      if(err){
+        console.log(`err:${err}`);
+        //res.json(newsongs);
+      }
+      else{
+        console.log('saved playlist');
+        res.json({success:true});
+      }
+
+    });
+}
