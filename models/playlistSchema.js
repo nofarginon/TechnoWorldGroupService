@@ -1,11 +1,12 @@
 var     mongoose = require (`mongoose`),
         schema = mongoose.Schema,
-        song=require('./song_schema').songSchema,
-        comments = require('./comments_schema').commentsSchema;
+        song=require('./song_schema').songSchema;
         playlistSchema = new schema({
             Djname: {type: String,required: true},
-            songs:[song],
-            comments: [comments]
+            Djimg: {type: String},
+            country:{type:String,required: true},
+            about:{type:String,required: true},
+            songs:[song]
     },{collection:`playlist`});
 
 var Playlist = mongoose.model(`playlist`, playlistSchema);

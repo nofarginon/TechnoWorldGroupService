@@ -18,8 +18,9 @@ app.use(bodyParser.json());
 app.use(
     (req,res,next) => {
         res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers",``,
-            "Origin, X-Requested-With, Content-Type, Accept");
+        // res.header("Access-Control-Allow-Headers",``,
+        //     "Origin, X-Requested-With, Content-Type, Accept");
+        res.header('Access-Control-Allow-Headers', 'X-Requested-With, Content-type,Accept,X-Access-Token,X-Key');
         res.set("Content-Type", "application/json");
         next();
     });
@@ -34,6 +35,7 @@ app.get('/getSongsData', Songs.getData);
 app.get('/getPlayListByPreferences',Songs.getPlayListByPreferences);
 app.get('/getPlayListByProPreferences',Songs.getPlayListByProPreferences);
 app.post('/login',User.login);
+app.post('/createPlaylist',Songs.createPlaylist);
 
 
 app.listen(port, () => {
