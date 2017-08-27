@@ -13,7 +13,8 @@ var     mongoose = require (`mongoose`),
             melodie: {type: String,required: true},
             scatter: {type: Number,required: true},
             mfx: {type: String,required: true},
-            likes: {type: Number,required: true}
+            likes: {type: Number,required: true},
+            url: {type: String}
     },{collection:`techno_songs`});
 
 exports.Song = mongoose.model(`song`, songSchema);
