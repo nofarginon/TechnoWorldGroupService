@@ -1,4 +1,7 @@
- const mongoose=require('mongoose');
+/**
+ * Created by Oriamd on 6/14/2017.
+ */
+ const mongoose=require('mongoose')
  var songs=require('../models/song_schema').Song,
      playlist=require('../models/playlistSchema');
 
@@ -127,7 +130,7 @@ exports.getPlayListByProPreferences = function (req, res) {
   (err,docs)=>{
       if(err)console.log('query error');
       console.log(docs);
-      if(docs.length===0) res.json({"error": "There is no playlist by these ProPreferences"});
+      if(!docs || docs.length===0) res.json({"error": "There is no playlist by these ProPreferences"});
       else res.json(docs);
   });
 };
