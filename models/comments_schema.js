@@ -6,9 +6,12 @@ var mongoose = require('mongoose'),
     commentsSchema = new schema({
         comment:{type: String, required: true},
         username:{type: String, required: true},
+        userPic:{type:String},
         replays : [
-            {comment:{type: String, required: true},
-            username:{type: String, required: true}}
+            {
+                comment:{type: String, required: true},
+                username:{type: String, required: true},
+                userPic:{type:String}}
             ]
     },{collection:'comments'});
 
