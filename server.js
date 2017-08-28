@@ -38,7 +38,7 @@ app.get('/getSongsData', Songs.getData);
 app.get('/getPlayListByPreferences',Songs.getPlayListByPreferences);
 app.get('/getPlayListByProPreferences',Songs.getPlayListByProPreferences);
 app.post('/login',User.login);
-app.post('/createPlaylist',Songs.createPlaylist);
+app.use('/createPlaylist',Songs.createPlaylist);
 app.post('/addComment',Comment.addComment);
 app.post('/replayComment',Comment.addReplay);
 
