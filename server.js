@@ -19,11 +19,11 @@ app.use(bodyParser.json());
 app.use(
     (req,res,next) => {
         res.header("Access-Control-Allow-Origin", "*");
-        //res.header("Access-Control-Allow-Headers",``,
-        //     "Origin, X-Requested-With, Content-Type, Accept");
-        res.header('Access-Control-Allow-Headers','Origin',``, 'X-Requested-With, Content-type,Accept,X-Access-Token,X-Key','application/json');
+        res.header("Access-Control-Allow-Headers",``,
+             "Origin, X-Requested-With, Content-Type, Accept");
+        //res.header('Access-Control-Allow-Headers','Origin',``, 'X-Requested-With, Content-type,Accept,X-Access-Token,X-Key');
         //res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
-        res.header("Access-Control-Allow-Credentials", true);
+        //res.header("Access-Control-Allow-Credentials", true);
         res.set("Content-Type", "application/json");
         next();
     });
