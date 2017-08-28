@@ -21,7 +21,7 @@ app.use(
         res.header("Access-Control-Allow-Origin", "*");
         // res.header("Access-Control-Allow-Headers",``,
         //     "Origin, X-Requested-With, Content-Type, Accept");
-        res.header('Access-Control-Allow-Headers', 'X-Requested-With, Content-type,Accept,X-Access-Token,X-Key');
+        res.header('Access-Control-Allow-Headers','Origin',``, 'X-Requested-With, Content-type,Accept,X-Access-Token,X-Key');
         res.set("Content-Type", "application/json");
         next();
     });
