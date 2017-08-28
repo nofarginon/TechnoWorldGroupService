@@ -131,6 +131,7 @@
                       &emsp;"error": "couldnot add a new user"</br>
                   }</br>
                   </br>
+                </div>
                 <div class="panel-heading"><h4>Create Playlist:</h4></div>
                 <div class="panel-body">
                 <h4><span class="label label-info">http verb:post</span></h4>
@@ -161,6 +162,49 @@
                   }</br>
                   </br>
             </div>
+            <div class="panel-heading"><h4>Add Comment:</h4></div>
+                <div class="panel-body">
+                <h4><span class="label label-info">http verb:post</span></h4>
+                <h4><span class="label label-primary">/addComment</span></h4>
+                <p>If you would like to replay on some playlist,you will have to insert these values:</br>
+                id:<br>comment:<br>username:</br>
+                id is the playlist id<br>
+                <a href="https://technoworldgroup.herokuapp.com/addComment">https://technoworldgroup.herokuapp.com/addComment</a>
+                </br>You will get a response in json view</p>
+                <h4><span class="label label-success">example of success message by json view<</span></h4>
+                  </br>
+                  {</br>
+                      &emsp;"success:true"</br>
+                  }</br>
+                  </br>
+                <h4><span class="label label-danger">example of error message by json view</span></h4>
+                  </br>
+                  {</br>
+                      &emsp;"error": "no playlist found with this id"</br>
+                  }</br>
+                  </br>
+            </div>
+            <div class="panel-heading"><h4>Replay Comment:</h4></div>
+                <div class="panel-body">
+                <h4><span class="label label-info">http verb:post</span></h4>
+                <h4><span class="label label-primary">/replayComment</span></h4>
+                <p>If you would like to replay on some comment,you will have to insert these values:</br>
+                comment_id:<br>id:<br>comment:<br>username:</br>
+                id is the playlist id<br>
+                <a href="https://technoworldgroup.herokuapp.com/replayComment">https://technoworldgroup.herokuapp.com/replayComment</a>
+                </br>You will get a response in json view</p>
+                <h4><span class="label label-success">example of success message by json view<</span></h4>
+                  </br>
+                  {</br>
+                      &emsp;"success:true"</br>
+                  }</br>
+                  </br>
+                <h4><span class="label label-danger">example of error message by json view</span></h4>
+                  </br>
+                  {</br>
+                      &emsp;"error": "no playlist found with this id of comment with this id"</br>
+                  }</br>
+                  </br>
             </div>
         </div>
     </div>
