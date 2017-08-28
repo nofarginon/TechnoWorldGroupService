@@ -47,15 +47,6 @@ exports.addComment = function (req,res) {
             }
             else
                 res.json({success:true});
-
-            //DEBUG
-            playlist.find({_id:req.body.id},
-                (err,list)=>{
-                    if(err) commentsLogger.writeLog(`find err: ${err}`);
-                    else {
-                        commentsLogger.writeLog(`${JSON.stringify(list)}`);
-                    }
-                });
         });
 };
 

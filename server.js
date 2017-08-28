@@ -4,8 +4,9 @@ const express = require('express'),
     serverLogger = Logger('Server'),
     port = process.env.PORT || 3000,
     bodyParser = require('body-parser'),
-    Songs = require('./controllers/songsController');
-    User =require('./controllers/userController');
+    Songs = require('./controllers/songsController'),
+    User =require('./controllers/userController'),
+    Comment = require('./controllers/comments_controller')
 
 var consts = require('./consts.js');
 
@@ -36,7 +37,8 @@ app.get('/getPlayListByPreferences',Songs.getPlayListByPreferences);
 app.get('/getPlayListByProPreferences',Songs.getPlayListByProPreferences);
 app.post('/login',User.login);
 app.post('/createPlaylist',Songs.createPlaylist);
-
+app.post('/addComment',Comment.addComment);
+app.post('/replayComment',Comment.addReplay);
 
 app.listen(port, () => {
     serverLogger.writeLog(`Server listening on port ${port}`);
