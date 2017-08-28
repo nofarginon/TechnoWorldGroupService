@@ -3,6 +3,7 @@ var     mongoose = require (`mongoose`),
         song=require('./song_schema').songSchema;
         comment=require('./comments_schema').commentsSchema;
         playlistSchema = new schema({
+            PlaylistName:{type: String,required: true},
             Djname: {type: String,required: true},
             Djimg: {type: String},
             country:{type:String,required: true},

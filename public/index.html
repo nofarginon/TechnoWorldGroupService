@@ -131,8 +131,39 @@
                       &emsp;"error": "couldnot add a new user"</br>
                   }</br>
                   </br>
+                <div class="panel-heading"><h4>Create Playlist:</h4></div>
+                <div class="panel-body">
+                <h4><span class="label label-info">http verb:post</span></h4>
+                <h4><span class="label label-primary">/createPlaylist</span></h4>
+                <p>If you would like to create your own playlist you will have to insert these values:</br>
+                PlaylistName:<br>Djname:<br>country:<br>about:<br>pick songs from a list<br>
+                <a href="https://technoworldgroup.herokuapp.com/createPlaylist">https://technoworldgroup.herokuapp.com/createPlaylist</a>
+                </br>You will get a response in json view</p>
+                <h4><span class="label label-success">example of data to send in raw data</span></h4>
+                  </br>
+                  {</br>
+                      &emsp;"PlaylistName:new playlist"</br>
+                      &emsp;"DjName:newuser"</br>
+                      &emsp;"country:israel"</br>
+                      &emsp;"about:new playlist best one"</br>
+                      &emsp;"songs:[1,2]"</br>
+                  }</br>
+                <h4><span class="label label-success">example of success message by json view<</span></h4>
+                  </br>
+                  {</br>
+                      &emsp;"success:true"</br>
+                  }</br>
+                  </br>
+                <h4><span class="label label-danger">example of error message by json view</span></h4>
+                  </br>
+                  {</br>
+                      &emsp;"error": "couldnot add a new user"</br>
+                  }</br>
+                  </br>
+            </div>
             </div>
         </div>
     </div>
 </body>
 </html>
+
