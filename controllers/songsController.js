@@ -4,27 +4,29 @@ const mongoose=require('mongoose')
      playlistbuild=require('../models/playlistSchema'),
      preferences=require('../models/preferencesSchema').preferences,
      propreferences=require('../models/preferencesSchema').proPreferences,
-     genreArray,periodArray,melodieArray,mfxArray;
+     genreArray,periodArray,melodieArray,mfxArray,
+     Logger = require('../logger');
+    songLogger = Logger("Songs_Controller");
 
 getPreferenceslocal((err,data)=>{
   if(err){
-    if(err)console.log('query error');
+    if(err)songLogger.writeLog('Error : getPreferenceslocal Cannot get pref');
   }
   else{
     genreArray=data[0].genre;
     periodArray=data[0].period;
   }
-});//["minimal","ambient","normal","schranz","hardcore"],["70's","80's","90's","modern"],
+});
 
 getProPreferenceslocal((err,data)=>{
   if(err){
-    if(err)console.log('query error');
+      songLogger.writeLog('Error : getProPreferenceslocal Cannot get pref');
   }
   else{
     melodieArray=data[0].melodie;
     mfxArray=data[0].mfx;
   }
-});//melodieArray=["monotone","normal","exciting"],mfxArray=["min","normal","max"];
+});
 
 
 var indexGenre,indexPeriod,reqBpm,indexMelodie,reqScatter,
@@ -61,34 +63,47 @@ var pro={
 exports.getData = function (req, res) {
   songs.find({},
   (err,docs)=>{
-      if(err)console.log('query error');
-      console.log(docs);
+      if(err){
+          songLogger.writeLog('Error: Cannot get songs');
+          docs = {error: "cannot get songs"};
+      }
+      else{
+          songLogger.writeLog('Success : sending songs');
+      }
       res.json(docs);
   });
 };
+
+function getPreferenceslocal(callback){
+    preferences.find({},callback);
+}
+function getProPreferenceslocal(callback){
+    propreferences.find({},callback);
+}
 
 exports.getPreferences = function (req, res) {
   getPreferenceslocal((err,docs)=>{
-      if(err)console.log('query error');
-      console.log(docs);
+      if(err){
+          songLogger.writeLog('Error : cannot get pref');
+          docs = {error: "cannot get pref"};
+      }
+      songLogger.writeLog('Success : sending pref');
       res.json(docs);
   });
 };
-function getPreferenceslocal(callback){
-  preferences.find({},callback);
-}
 
 exports.getProPreferences = function (req, res) {
   getProPreferenceslocal((err,docs)=>{
-      if(err)console.log('query error');
-      console.log(docs);
+      if(err){
+          songLogger.writeLog('Error : cannot get pref');
+          docs = {error: "cannot get pref"};
+      }
+      songLogger.writeLog('Success : sending pref');
       res.json(docs);
   });
 };
 
-function getProPreferenceslocal(callback){
-  propreferences.find({},callback);
-}
+
 /**
  * return as response json of Playlist matching Preferences params
  * @param req
@@ -109,14 +124,18 @@ exports.getPlayListByPreferences = function (req, res) {
     else if(indexPeriod+1===periodArray.length) query.songs.$elemMatch.period.$in.push(periodArray[indexPeriod],periodArray[indexPeriod-1]);
     else query.songs.$elemMatch.period.$in.push(periodArray[indexPeriod-1],periodArray[indexPeriod],periodArray[indexPeriod+1]);
   }
-  console.log(JSON.stringify(query));
 
   playlist.find(query,
   (err,docs)=>{
-      if(err)console.log('query error');
-      console.log(docs);
-      if(docs.length===0) res.json({"error": "There is no playlist by these Preferences"});
-      else res.json(docs);
+      if(err)songLogger.writeLog('Error :'+err);
+      if(docs.length===0){
+          res.json({"error": "There is no playlist by these Preferences"});
+          songLogger.writeLog('Error :  There is no playlist by these Preferences');
+      }
+      else {
+          songLogger.writeLog("Success : Sending Playlists");
+          res.json(docs);
+      }
   });
 };
 
@@ -162,27 +181,30 @@ exports.getPlayListByProPreferences = function (req, res) {
   if(reqCymbal===5) pro.songs.$elemMatch.cymbal.$in.push(3,5);
   else pro.songs.$elemMatch.cymbal.$in.push(1,3);
 
-  console.log(JSON.stringify(pro));
+  songLogger.writeLog(JSON.stringify(pro));
   playlist.find(pro,
   (err,docs)=>{
-      if(err)console.log('query error');
-      console.log(docs);
-      if(!docs || docs.length===0) res.json({"error": "There is no playlist by these ProPreferences"});
-      else res.json(docs);
+      if(err)songLogger.writeLog('Error :'+err);
+      if(docs.length===0){
+          res.json({"error": "There is no playlist by these Preferences"});
+          songLogger.writeLog('Error :  There is no playlist by these Preferences');
+      }
+      else {
+          songLogger.writeLog("Success : Sending Playlists");
+          res.json(docs);
+      }
   });
 };
 
 
 exports.createPlaylist = function (req, res) {
-    // var newsongs=songs.find({_id:{$in:req.body.songs.map(function(id){return mongoose.Types.ObjectId(id);})}});
     songs.find({"id":{$in:req.body.songs}},(err,newsongs)=>{
       if(err){
-        console.log(`err:${err}`);
-        res.json({error:'couldnot add a new playlist'});
-        //res.json(newsongs);
+        songLogger.writeLog(`err:${err}`);
+        res.json({error:'no songs found'});
       }
       else{
-            console.log(newsongs);
+        songLogger.writeLog("Songs Found now adding playlist");
         newPlaylist(req,res,newsongs);
       }
 
@@ -202,11 +224,11 @@ function newPlaylist(req, res,newsongs){
   newPlaylist.save(
     (err)=>{
       if(err){
-        console.log(`err:${err}`);
-        //res.json(newsongs);
+        songLogger.writeLog(`err:${err}`);
+        res.json({error:"Could no create new Playlist"});
       }
       else{
-        console.log('saved playlist');
+        songLogger.writeLog('Success : playlist saved');
         res.json({success:true});
       }
 

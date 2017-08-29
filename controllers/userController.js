@@ -24,11 +24,11 @@ exports.login = function (req, res) {
   newUser.save(
     (err)=>{
       if(err){
-          userLogger('err:${err}');
+          userLogger.writeLog('err:${err}');
           res.json({error:'could not add a new user'});
       }
       else{
-          userLogger('Success : User Added');
+          userLogger.writeLog('Success : User Added');
           res.json({success:true});
       }
 
