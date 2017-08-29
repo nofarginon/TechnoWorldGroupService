@@ -31,6 +31,8 @@ app.get('/',function(req,res){
   res.sendFile(`assets/`);
 });
 
+app.get('/getPreferences', Songs.getPreferences);
+app.get('/getProPreferences', Songs.getProPreferences);
 app.get('/getSongsData', Songs.getData);
 app.get('/getPlayListByPreferences',Songs.getPlayListByPreferences);
 app.get('/getPlayListByProPreferences',Songs.getPlayListByProPreferences);

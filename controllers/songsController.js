@@ -1,10 +1,9 @@
-/**
- * Created by Oriamd on 6/14/2017.
- */
- const mongoose=require('mongoose')
+const mongoose=require('mongoose')
  var songs=require('../models/song_schema').Song,
      playlist=require('../models/playlistSchema'),
      playlistbuild=require('../models/playlistSchema');
+     preferences=require('../models/preferencesSchema').preferences;
+     propreferences=require('../models/preferencesSchema').proPreferences;
 
 var genreArray=["minimal","ambient","normal","schranz","hardcore"],
     periodArray=["70's","80's","90's","modern"],
@@ -46,6 +45,23 @@ var pro={
  */
 exports.getData = function (req, res) {
   songs.find({},
+  (err,docs)=>{
+      if(err)console.log('query error');
+      console.log(docs);
+      res.json(docs);
+  });
+};
+
+exports.getPreferences = function (req, res) {
+  preferences.find({},
+  (err,docs)=>{
+      if(err)console.log('query error');
+      console.log(docs);
+      res.json(docs);
+  });
+};
+exports.getProPreferences = function (req, res) {
+  propreferences.find({},
   (err,docs)=>{
       if(err)console.log('query error');
       console.log(docs);
