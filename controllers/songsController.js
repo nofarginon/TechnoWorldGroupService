@@ -5,10 +5,27 @@ const mongoose=require('mongoose')
      preferences=require('../models/preferencesSchema').preferences;
      propreferences=require('../models/preferencesSchema').proPreferences;
 
-var genreArray=["minimal","ambient","normal","schranz","hardcore"],
-    periodArray=["70's","80's","90's","modern"],
-    melodieArray=["monotone","normal","exciting"],
-    mfxArray=["min","normal","max"];
+getPreferenceslocal((err,data)=>{
+  if(err){
+    if(err)console.log('query error');
+  }
+  else{
+    var genreArray=data[0].genre;
+    //console.log(genreArray);
+    var periodArray=data[0].period;
+  }
+});//["minimal","ambient","normal","schranz","hardcore"],["70's","80's","90's","modern"],
+
+getProPreferenceslocal((err,data)=>{
+  if(err){
+    if(err)console.log('query error');
+  }
+  else{
+    var melodieArray=data[0].melodie;
+    //console.log(melodieArray);
+    var mfxArray=data[0].mfx;
+  }
+});//melodieArray=["monotone","normal","exciting"],mfxArray=["min","normal","max"];
 
 
 var indexGenre,indexPeriod,reqBpm,indexMelodie,reqScatter,
@@ -37,7 +54,6 @@ var pro={
         }
     }
   };
-
 /*
  * return as response json of all songs in db
  * @param req
@@ -53,22 +69,27 @@ exports.getData = function (req, res) {
 };
 
 exports.getPreferences = function (req, res) {
-  preferences.find({},
-  (err,docs)=>{
+  getPreferenceslocal((err,docs)=>{
       if(err)console.log('query error');
       console.log(docs);
       res.json(docs);
   });
 };
+function getPreferenceslocal(callback){
+  preferences.find({},callback);
+}
+
 exports.getProPreferences = function (req, res) {
-  propreferences.find({},
-  (err,docs)=>{
+  getProPreferenceslocal((err,docs)=>{
       if(err)console.log('query error');
       console.log(docs);
       res.json(docs);
   });
 };
 
+function getProPreferenceslocal(callback){
+  propreferences.find({},callback);
+}
 /**
  * return as response json of Playlist matching Preferences params
  * @param req
