@@ -1,9 +1,10 @@
 //--------------------------------Connect to mongodb on mLab via Mongoose--------------------------------//
 const consts = require('./consts'),
-mongoose = require('mongoose');
+      mongoose = require('mongoose');
+
 mongoose.Promise = global.Promise;
 //The server option auto_reconnect is defaulted to true
-var options = {
+let options = {
   server: {
     auto_reconnect:true,
   }

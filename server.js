@@ -2,19 +2,20 @@ const express = require('express'),
     app = express(),
     Logger = require('./logger'),
     serverLogger = Logger('Server'),
-    port = process.env.PORT || 3000,
     bodyParser = require('body-parser'),
     Songs = require('./controllers/songsController'),
     User =require('./controllers/userController'),
-    Comment = require('./controllers/comments_controller');
-
+    Comment = require('./controllers/comments_controller'),
+    port = process.env.PORT || 3000;
 consts = require('./consts.js');
+
 
 app.set('port',port);
 app.use('/assets', express.static(`${__dirname}/public`));
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
 
 app.use(
     (req,res,next) => {
@@ -25,11 +26,13 @@ app.use(
         next();
     });
 
+
 /*** All routs***/
 app.get('/',function(req,res){
-  serverLogger.writeLog(" '/' request");
+  serverLogger.writeLog("Request In");
   res.sendFile(`assets/`);
 });
+
 
 app.get('/getSongsData', Songs.getData);
 app.get('/getPlayListByPreferences',Songs.getPlayListByPreferences);

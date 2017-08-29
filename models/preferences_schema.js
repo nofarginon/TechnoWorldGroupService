@@ -1,8 +1,8 @@
 /**
  * Created by Ori on 7/24/2017.
  */
-var mongoose = require('mongoose'),
-    Schema = mongoose.Schema,
+let mongoose = require('mongoose'),
+    schema = mongoose.Schema,
     preferencesSchema = new schema({
         regularPreferences : {
             period:[

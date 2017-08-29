@@ -1,8 +1,20 @@
 const mongoose=require('mongoose');
-var user=require('../models/userSchema').User;
+let user=require('../models/userSchema').User,
+    Logger = require('../logger'),
+    userLogger = Logger('User_Controller');
 
+/**
+ * Adding new User to DB
+ * @param req body parameters
+ *          name : String
+ *          username : String
+ *          password : String
+ *          email : String
+ *          bday : String
+ * @param res
+ */
 exports.login = function (req, res) {
-  var newUser=new user({
+  let newUser=new user({
     name :req.body.name,
     username:req.body.username,
     password: req.body.password,
@@ -12,14 +24,14 @@ exports.login = function (req, res) {
   newUser.save(
     (err)=>{
       if(err){
-        console.log('err:${err}');
-        res.json({error:'couldnot add a new user'});
+          userLogger('err:${err}');
+          res.json({error:'could not add a new user'});
       }
       else{
-        console.log('saved user');
-        res.json({success:true});
+          userLogger('Success : User Added');
+          res.json({success:true});
       }
 
     });
-}
+};
 
