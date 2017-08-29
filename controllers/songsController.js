@@ -1,18 +1,18 @@
 const mongoose=require('mongoose')
  var songs=require('../models/song_schema').Song,
      playlist=require('../models/playlistSchema'),
-     playlistbuild=require('../models/playlistSchema');
-     preferences=require('../models/preferencesSchema').preferences;
-     propreferences=require('../models/preferencesSchema').proPreferences;
+     playlistbuild=require('../models/playlistSchema'),
+     preferences=require('../models/preferencesSchema').preferences,
+     propreferences=require('../models/preferencesSchema').proPreferences,
+     genreArray,periodArray,melodieArray,mfxArray;
 
 getPreferenceslocal((err,data)=>{
   if(err){
     if(err)console.log('query error');
   }
   else{
-    var genreArray=data[0].genre;
-    //console.log(genreArray);
-    var periodArray=data[0].period;
+    genreArray=data[0].genre;
+    periodArray=data[0].period;
   }
 });//["minimal","ambient","normal","schranz","hardcore"],["70's","80's","90's","modern"],
 
@@ -21,9 +21,8 @@ getProPreferenceslocal((err,data)=>{
     if(err)console.log('query error');
   }
   else{
-    var melodieArray=data[0].melodie;
-    //console.log(melodieArray);
-    var mfxArray=data[0].mfx;
+    melodieArray=data[0].melodie;
+    mfxArray=data[0].mfx;
   }
 });//melodieArray=["monotone","normal","exciting"],mfxArray=["min","normal","max"];
 
