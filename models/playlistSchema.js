@@ -1,6 +1,6 @@
 let mongoose = require (`mongoose`),
     schema = mongoose.Schema,
-    song=require('./song_schema').songSchem,
+    song = require('./song_schema').songSchema,
     comment=require('./comments_schema').commentsSchema,
     playlistSchema = new schema({
         PlaylistName:{type: String,required: true},
