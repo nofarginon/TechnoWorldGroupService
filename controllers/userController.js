@@ -29,9 +29,41 @@ exports.login = function (req, res) {
       }
       else{
           userLogger.writeLog('Success : User Added');
+          simpleUserSignIn();
           res.json({success:true});
       }
 
     });
 };
+
+// Load the AWS SDK for Node.js
+var AWS = require('aws-sdk');
+// Load credentials and set region from JSON file
+AWS.config.loadFromPath('./config.json');
+
+// Create CloudWatch service object
+var cw = new AWS.CloudWatch({apiVersion: '2010-08-01'});
+
+// Create parameters JSON for putMetricData
+var UserSignInParam = {
+        MetricData: [
+            {
+                MetricName: 'playlist_requests',
+                Dimensions: [
+                    {
+                        Name: 'User_Type',
+                        Value: 'Simple_User'
+                    },
+                ],
+                Unit: 'sum',
+                Value: 1.0
+            },
+        ],
+        Namespace: 'Site_Requests'
+    };
+
+
+function simpleUserSignIn(){
+    cw.putMetricData(UserSignInParam,(err,data)=>{});
+}
 
