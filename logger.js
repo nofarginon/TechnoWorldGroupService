@@ -2,12 +2,13 @@
  * Created by Ori on 4/24/2017.
  */
 const moment = require('./node_modules/moment/moment');
-
+var fs = require('fs');
 
  class Logger{
-
+ 
     constructor(name){
         this.name= name;
+        this.logFile = '/var/log/messages';
     }
 
     /**
@@ -17,6 +18,8 @@ const moment = require('./node_modules/moment/moment');
     writeLog(msg){
         let logMsg = `${moment()} # ${this.name} : ${msg}`;
         console.log(logMsg);
+        fs.appendFile(this.logFile,`# ${this.name} : ${msg}\n`,()=>{});
+
     }
 
 }

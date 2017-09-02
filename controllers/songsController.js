@@ -134,6 +134,7 @@ exports.getPlayListByPreferences = function (req, res) {
       }
       else {
           songLogger.writeLog("Success : Sending Playlists");
+	 metricDataRegularPrefReq();
           res.json(docs);
       }
   });
@@ -191,6 +192,7 @@ exports.getPlayListByProPreferences = function (req, res) {
       }
       else {
           songLogger.writeLog("Success : Sending Playlists");
+	 metricDataProPrefReq();
           res.json(docs);
       }
   });
@@ -234,3 +236,58 @@ function newPlaylist(req, res,newsongs){
 
     });
 }
+
+
+// Load the AWS SDK for Node.js
+var AWS = require('aws-sdk');
+// Load credentials and set region from JSON file
+AWS.config.loadFromPath('./config.json');
+
+// Create CloudWatch service object
+var cw = new AWS.CloudWatch({apiVersion: '2010-08-01'});
+
+// Create parameters JSON for putMetricData
+var ProPrefParams = {
+  MetricData: [
+    {
+      MetricName: 'playlist_requests',
+      Dimensions: [
+        {
+          Name: 'Preferences_types',
+          Value: 'Pro_Pref'
+        },
+      ],
+      Unit: 'None',
+      Value: 1.0
+    },
+  ],
+  Namespace: 'Site_Requests'
+},
+RegularPrefParams = {
+  MetricData: [
+    {
+      MetricName: 'playlist_requests',
+      Dimensions: [
+        {
+          Name: 'Preferences_types',
+          Value: 'Regular_Pref'
+        },
+      ],
+      Unit: 'None',
+      Value: 1.0
+    },
+  ],
+  Namespace: 'Site_Requests'
+};
+
+
+function metricDataProPrefReq(){
+	cw.putMetricData(ProPrefParams,(err,data)=>{});
+}
+function metricDataRegularPrefReq(){
+	 cw.putMetricData(RegularPrefParams,(err,data)=>{});
+}
+
+
+
+
