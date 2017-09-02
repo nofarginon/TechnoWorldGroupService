@@ -48,7 +48,7 @@ var cw = new AWS.CloudWatch({apiVersion: '2010-08-01'});
 var UserSignInParam = {
         MetricData: [
             {
-                MetricName: 'playlist_requests',
+                MetricName: 'new_user_requests',
                 Dimensions: [
                     {
                         Name: 'User_Type',
